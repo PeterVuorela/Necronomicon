@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private GameObject DragPrefab;
 	
+	[SerializeField]
+	private LevelBase[] LevelArray;
+	
+	public static LevelBase CurrentLevel;
 	private static GameManager _Instance;
 	
 	void Awake()
@@ -17,11 +21,16 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
 		Application.targetFrameRate = 60;
+		
+		StarFirstLevel();
 	}
-	
-	public virtual void startGame()
+
+	public void StarFirstLevel()
 	{
-		//
+		if (CurrentLevel == null)
+		{
+			GameObject.Instantiate(LevelArray[0].gameObject);
+		}
 	}
 
 	public virtual void restartTheGame()
@@ -40,10 +49,15 @@ public class GameManager : MonoBehaviour
 	public GameObject InstantiateDragObjectTo(GameObject obj)
 	{
 		GameObject newObj = null;
-		if (DragPrefab != null && obj != null)
+		if (DragPrefab != null)
 		{
-			newObj = Instantiate(DragPrefab) as GameObject;
-			newObj.transform.parent = obj.transform;
+			newObj = GameObject.Instantiate(DragPrefab) as GameObject;
+			
+			if (obj != null)
+			{
+				newObj.transform.parent = obj.transform;
+			}
+			
 			newObj.transform.localPosition = Vector3.zero;
 			newObj.transform.localScale = DragPrefab.transform.localScale;
 		}
