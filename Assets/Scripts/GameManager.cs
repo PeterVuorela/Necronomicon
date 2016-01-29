@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 	
 	private static GameManager _Instance;
 	
+	void Awake()
+	{
+		_Instance = this;
+	}
+	
 	void Start()
 	{
 		Application.targetFrameRate = 60;
@@ -32,15 +37,17 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
-	public void InstantiateDragObjectTo(GameObject obj)
+	public GameObject InstantiateDragObjectTo(GameObject obj)
 	{
+		GameObject newObj = null;
 		if (DragPrefab != null && obj != null)
 		{
-			GameObject newObj = obj.Instantiate(DragPrefab) as GameObject;
+			newObj = Instantiate(DragPrefab) as GameObject;
+			newObj.transform.parent = obj.transform;
 			newObj.transform.localPosition = Vector3.zero;
-			newObj.transform.localScale = Vector3.one;
-			
-			return newObj;
+			newObj.transform.localScale = DragPrefab.transform.localScale;
 		}
+		
+		return newObj;
 	}
 }

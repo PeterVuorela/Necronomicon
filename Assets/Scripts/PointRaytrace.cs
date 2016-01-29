@@ -10,7 +10,7 @@ public class PointRaytrace : MonoBehaviour
 	private Ray ray;
 	private static float nextTouchTime = 0f;
 	
-	void Awake()
+	void Start()
 	{
 		if (renderTrail == null)
 		{
