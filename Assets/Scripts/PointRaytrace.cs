@@ -2,12 +2,8 @@
 using System.Collections;
 
 public class PointRaytrace : MonoBehaviour
-{
-	[SerializeField]
-	public GameObject renderPrefab;
+{	
 	private static GameObject renderTrail;
-	
-	public const float Force = 170f;
 
 	private bool touching = false;
 	private RaycastHit hit;
@@ -16,16 +12,9 @@ public class PointRaytrace : MonoBehaviour
 	
 	void Awake()
 	{
-		if (renderTrail == null && renderPrefab != null)
+		if (renderTrail == null)
 		{
-			GameObject newObj = Instantiate(renderPrefab) as GameObject;
-			newObj.transform.localPosition = Vector3.zero;
-			newObj.transform.localScale = Vector3.one;
-			
-			if(newObj != null)
-			{
-				renderTrail = newObj;
-			}
+			renderTrail = GameManager.instance.InstantiateDragObjectTo(gameObject);
 		}
 	}
 
