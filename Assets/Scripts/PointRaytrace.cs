@@ -5,7 +5,7 @@ public class PointRaytrace : MonoBehaviour
 {
 	[SerializeField]
 	public GameObject renderPrefab;
-	private static TrailRenderer renderTrail;
+	private static GameObject renderTrail;
 	
 	public const float Force = 170f;
 
@@ -22,9 +22,9 @@ public class PointRaytrace : MonoBehaviour
 			newObj.transform.localPosition = Vector3.zero;
 			newObj.transform.localScale = Vector3.one;
 			
-			if(newObj != null && newObj.GetComponent<TrailRenderer>() != null)
+			if(newObj != null)
 			{
-				renderTrail = newObj.GetComponent<TrailRenderer>();
+				renderTrail = newObj;
 			}
 		}
 	}
@@ -37,7 +37,7 @@ public class PointRaytrace : MonoBehaviour
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			
 			//nextTouchTime <= Time.timeSinceLevelLoad
-			Debug.Log(nextTouchTime + " : " + Time.timeSinceLevelLoad);
+			//Debug.Log(nextTouchTime + " : " + Time.timeSinceLevelLoad);
 			
 			if (renderTrail != null)
 			{
