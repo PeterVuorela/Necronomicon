@@ -5,6 +5,8 @@ TextureImporter:
     21300000: Particle2_0
     21300002: Particle2_1
     21300004: Particle2_2
+    21300006: Particle2_3
+    21300008: Particle2_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -70,6 +72,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particle2_3
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Particle2_4
+      rect:
+        serializedVersion: 2
+        x: 32
         y: 0
         width: 8
         height: 8
