@@ -44,6 +44,11 @@ public class PointRaytrace : MonoBehaviour
 		{
 			touching = false;
 		}
+		
+		if (renderTrail != null)
+		{
+			renderTrail.SetActive(touching);
+		}
 	}
 
 	private bool ifEditor()

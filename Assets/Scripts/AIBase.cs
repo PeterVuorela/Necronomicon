@@ -37,7 +37,10 @@ public class AIBase : MonoBehaviour
 		Vector3 from = transform.localPosition;
 		Vector3 to = CurrentTarget.transform.localPosition;
 		
-		tweener.easeFromTo(from, to, 1f, Easing.Linear, targetReached);
+		Tweener.TweenDelegate[] easings = new Tweener.TweenDelegate[]{ Easing.Linear };
+		Tweener.TweenDelegate randomEasing = easings[Random.Range(0, easings.Length-1)];
+		
+		tweener.easeFromTo(from, to, 0.5f, randomEasing, targetReached);
 		Debug.Log("AI CurrentTarget: " + CurrentTarget.id);
 	}
 	
