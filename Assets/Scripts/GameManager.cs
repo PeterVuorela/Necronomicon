@@ -44,9 +44,8 @@ public class GameManager : MonoBehaviour
 		if (CurrentState != state)
 		{
 			CurrentState = state;
-			GameManager.instance.UpdateGame();
-			
 			Debug.Log("CurrentState: " + CurrentState);
+			GameManager.instance.UpdateGame();
 		}
 	}
 	
@@ -62,14 +61,14 @@ public class GameManager : MonoBehaviour
 		}
 		else if(CurrentState == GameState.AI)
 		{
-			// Showing to player what to do
+			// Create AI if null
 			if (CurrentAI == null)
 			{
 				CurrentAI = AIBase.CreateAIToGameobject(GameManager.CurrentLevel.gameObject);
 			}
 			
 			// Showing to player what to do
-			CurrentAI.StartRandomAI();
+			CurrentAI.StartShowHint();
 		}
 		else if(CurrentState == GameState.Player)
 		{

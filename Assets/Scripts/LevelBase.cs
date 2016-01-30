@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,11 +49,19 @@ public class LevelBase : MonoBehaviour
 		transform.Rotate(GetCurrentRotation());
 	}
 	
-	public void GiveXAmountOfRandomTargetsVector( int targetAmount, ref Vector3[] resultArray)
+	public void PopulateWithXAmountOfRandomTargets( int targetAmount, ref List<TargetBase> resultList)
 	{
-		for (int i = 0; i < resultArray.Length; i++)
+		// Randomize List
+		var rnd = new System.Random(); 
+		TargetsList = TargetsList.OrderBy(x => rnd.Next()).ToList();
+		
+		//Clear
+		resultList.Clear();
+		
+		// Populate
+		for (int i = 0; i < targetAmount; i++)
 		{
-			resultArray[i] = GiveRandomTarget().transform.localPosition;
+			resultList.Add(TargetsList[i]);
 		}
 	}
 	
