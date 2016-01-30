@@ -31,6 +31,11 @@ public class LevelBase : MonoBehaviour
 		TestAI();
 	}
 	
+	void Update()
+	{
+		transform.Rotate(Vector3.back * Time.deltaTime * 5f);
+	}
+	
 	public void GiveXAmountOfRandomTargetsVector( int targetAmount, ref Vector3[] resultArray)
 	{
 		for (int i = 0; i < resultArray.Length; i++)
