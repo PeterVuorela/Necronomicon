@@ -35,7 +35,7 @@ public class LevelBase : MonoBehaviour
 	
 	void Update()
 	{
-		transform.Rotate(Vector3.back * Time.deltaTime * 5f);
+		transform.Rotate(GetCurrentRotation());
 	}
 	
 	public void GiveXAmountOfRandomTargetsVector( int targetAmount, ref Vector3[] resultArray)
@@ -49,6 +49,16 @@ public class LevelBase : MonoBehaviour
 	public TargetBase GiveRandomTarget()
 	{
 		return TargetsList[Random.Range(0, TargetsList.Count-1)];
+	}
+	
+	public static Vector3 GetCurrentRotation(float speed = 5f, bool clockwise = true)
+	{
+		if (clockwise)
+		{
+			return Vector3.back * Time.deltaTime * speed;
+		}
+		
+		return -Vector3.back * Time.deltaTime * speed;
 	}
 	
 	private void TestAI()
