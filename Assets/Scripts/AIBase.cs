@@ -4,10 +4,23 @@ using System.Collections.Generic;
 
 public class AIBase : MonoBehaviour
 {
+	public static bool Init = false;
+	
 	private bool AIEnabled = false;
 	private Tweener tweener = new Tweener();
 	private TargetBase CurrentTarget = null;
 	private TargetBase LastTarget = null;
+	
+	public static AIBase CreateAIToGameobject(GameObject obj)
+	{
+		GameObject newObj = GameManager.instance.InstantiateDragObjectTo(obj, false);
+			
+		// Add AI
+		AIBase ai = newObj.AddComponent<AIBase>();
+		ai.StartRandomAI();
+		
+		return ai;
+	}
 	
 	void Update()
 	{
@@ -20,13 +33,18 @@ public class AIBase : MonoBehaviour
 	
 	public void StartRandomAI()
 	{
+		gameObject.SetActive(true);
+		
 		AIEnabled = true;
 		SetTarget(GameManager.CurrentLevel.GiveRandomTarget());
 	}
 	
-	public void StopAll()
+	public void StopAndClear()
 	{
 		AIEnabled = false;
+		CurrentTarget = null;
+		tweener = null;
+		gameObject.SetActive(false);
 	}
 	
 	private void SetTarget(TargetBase target)

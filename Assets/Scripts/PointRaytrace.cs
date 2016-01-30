@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PointRaytrace : MonoBehaviour
 {	
-	private static GameObject renderTrail;
+	private static GameObject playerTrail;
 
 	private bool touching = false;
 	private RaycastHit hit;
@@ -12,15 +12,15 @@ public class PointRaytrace : MonoBehaviour
 	
 	void Start()
 	{
-		if (renderTrail == null)
+		if (playerTrail == null)
 		{
-			renderTrail = GameManager.instance.InstantiateDragObjectTo(GameManager.CurrentLevel.gameObject);
+			playerTrail = GameManager.instance.InstantiateDragObjectTo(null);
 		}
 	}
 
 	void Update ()
 	{
-		if( (ifEditor() && Input.GetMouseButton(0)) || Input.touchCount > 0 )
+		if( GameManager.CurrentState == GameManager.GameState.Player && (ifEditor() && Input.GetMouseButton(0)) || Input.touchCount > 0 )
 		{
 			touching = true;
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -28,9 +28,9 @@ public class PointRaytrace : MonoBehaviour
 			//nextTouchTime <= Time.timeSinceLevelLoad
 			//Debug.Log(nextTouchTime + " : " + Time.timeSinceLevelLoad);
 			
-			if (renderTrail != null)
+			if (playerTrail != null)
 			{
-				renderTrail.transform.position = ray.origin;
+				playerTrail.transform.position = ray.origin;
 			}
 			
 			nextTouchTime = Time.timeSinceLevelLoad;
@@ -45,9 +45,9 @@ public class PointRaytrace : MonoBehaviour
 			touching = false;
 		}
 		
-		if (renderTrail != null)
+		if (playerTrail != null)
 		{
-			renderTrail.SetActive(touching);
+			playerTrail.SetActive(touching);
 		}
 	}
 

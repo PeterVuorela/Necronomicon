@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
+[Serializable]
+public class GameRules
+{
+	public int SuccessesNeeded;
+	public int AcceptedFailures;
+}
 
 public class LevelBase : MonoBehaviour
 {
@@ -10,12 +18,13 @@ public class LevelBase : MonoBehaviour
 	[SerializeField]
 	private bool RotateEnable = true;
 	
+	[SerializeField]
+	private GameRules LevelRules;
+	
 	public const string TargetTag = "Target";
 	public static List<TargetBase> TargetsList = new List<TargetBase>();
 	
-	public static AIBase AI;
-	
-	void Start () 
+	void Awake () 
 	{
 		TargetBase[] targetsArray = transform.gameObject.GetComponentsInChildren<TargetBase>();
 		for (int i = 0; i < targetsArray.Length; i++)
@@ -32,8 +41,6 @@ public class LevelBase : MonoBehaviour
 		}
 		
 		GameManager.CurrentLevel = this;
-		
-		TestAI();
 	}
 	
 	void Update()
@@ -51,7 +58,7 @@ public class LevelBase : MonoBehaviour
 	
 	public TargetBase GiveRandomTarget()
 	{
-		return TargetsList[Random.Range(0, TargetsList.Count-1)];
+		return TargetsList[UnityEngine.Random.Range(0, TargetsList.Count-1)];
 	}
 	
 	public static Vector3 GetCurrentRotation(bool clockwise = true, float speed = 5f)
@@ -67,15 +74,5 @@ public class LevelBase : MonoBehaviour
 		}
 		
 		return -Vector3.back * Time.deltaTime * speed;
-	}
-	
-	private void TestAI()
-	{
-		GameObject obj = GameManager.instance.InstantiateDragObjectTo(null, false);
-		obj.transform.parent = transform;
-		obj.transform.localScale = Vector3.one;
-		
-		AIBase ai = obj.AddComponent<AIBase>();
-		ai.StartRandomAI();
 	}
 }
