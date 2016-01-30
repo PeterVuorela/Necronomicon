@@ -83,7 +83,7 @@ public class LevelBase : MonoBehaviour
 	
 	public static Vector3 GetCurrentRotation(bool clockwise = true, float speed = 10f)
 	{
-		if (!GameManager.CurrentLevel.RotateEnable || GameManager.CurrentState == GameManager.GameState.AI)
+		if (!GameManager.CurrentLevel.RotateEnable || GameManager.CurrentState == GameManager.GameState.GameAI)
 		{
 			return Vector3.zero;
 		}

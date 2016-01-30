@@ -42,7 +42,7 @@ public class PointRaytrace : MonoBehaviour
 			if (Physics.Raycast(ray, out hit, 100f))
 			{
 				// HIT
-				if (GameManager.CurrentState == GameManager.GameState.Player)
+				if (GameManager.CurrentState == GameManager.GameState.GamePlayer)
 				{
 					hitBase = hit.collider.gameObject.GetComponent<TargetBase>();
 					if (hitBase != null)

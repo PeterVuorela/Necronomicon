@@ -115,7 +115,7 @@ public class AIBase : MonoBehaviour
 	private void SetAIDoneState()
 	{
 		CurrentState = State.Done;
-		GameManager.ChangeState(GameManager.GameState.Player);
+		GameManager.ChangeState(GameManager.GameState.GamePlayer);
 	}
 	
 	private TargetBase GetNextTarget()
