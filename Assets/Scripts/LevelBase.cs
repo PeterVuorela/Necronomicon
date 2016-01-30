@@ -43,8 +43,6 @@ public class LevelBase : MonoBehaviour
 			}
 			TargetsList.Add(targetsArray[i].GetComponent<TargetBase>());
 		}
-		
-		GameManager.CurrentLevel = this;
 	}
 	
 	void Update()

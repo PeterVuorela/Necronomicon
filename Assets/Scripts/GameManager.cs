@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 	{
 		None,
 		GameStart,
-		LevelSelect,
+		Intro,
+		LoadLevel,
 		GameAI,
 		GamePlayer,
-		GameLost,
-		GameWin
+		LevelLost,
+		LevelWin,
+		GameEndWin
 	}
 
 	[SerializeField]
@@ -39,13 +41,14 @@ public class GameManager : MonoBehaviour
 	
 	private GameObject CurrentUIMenu = null;
 	
+	public static int CurrentLevelIndex = 0;
 	public static LevelBase CurrentLevel;
 	public static GameState CurrentState = GameState.None;
 	public static GameState OnClickGotoState = GameState.None;
 	public static AIBase CurrentAI;
 	
-	private static int SessionWins = 0;
-	private static int SessionPlays = 0;
+	private static int LevelComboWins = 0;
+	private static int LevelCombosPlayed = 0;
 	
 	private static GameManager _Instance;
 	
@@ -82,65 +85,81 @@ public class GameManager : MonoBehaviour
 	
 	public void UpdateGameState()
 	{
+		if (CurrentState == GameState.LevelWin || CurrentState == GameState.LevelLost)
+		{
+			// Clear Game
+			if (GameManager.CurrentLevel != null)
+			{
+				GameManager.CurrentLevel.ClearAndDestroy();
+				GameManager.CurrentLevel = null;
+			}
+		}
+		
 		if (CurrentState == GameState.GameStart)
 		{
 			ShowUIMenu(TitleMenu);
-			OnClickGotoState = GameState.LevelSelect;
+			OnClickGotoState = GameState.Intro;
+			CurrentLevelIndex = 0;
 		}
-		else if(CurrentState == GameState.LevelSelect)
-		{
-			SessionWins = 0;
-			SessionPlays = 0;
-			
+		else if(CurrentState == GameState.Intro)
+		{	
 			ShowUIMenu(InfoMenu);
-			OnClickGotoState = GameState.GameAI;
+			OnClickGotoState = GameState.LoadLevel;
+		}
+		else if(CurrentState == GameState.LoadLevel)
+		{
+			LevelComboWins = 0;
+			LevelCombosPlayed = 0;
+			
+			if(LoadCurrentLevel())
+			{
+				ShowUIMenu(null);
+				ChangeState(GameState.GameAI);
+			}
 		}
 		else if(CurrentState == GameState.GameAI)
 		{
-			LoadFirstLevelIfNull();
-		
-			ShowUIMenu(null);
-			
-			PointRaytrace.CurrentPlayerHitsID = "";
-			
-			// Create AI if null
-			if (CurrentAI == null)
+			if (GameManager.CurrentLevel != null)
 			{
-				CurrentAI = AIBase.CreateAIToGameobject(GameManager.CurrentLevel.gameObject);
+				ShowUIMenu(null);
+				
+				PointRaytrace.CurrentPlayerHitsID = "";
+				
+				// Create AI if null
+				if (CurrentAI == null)
+				{
+					CurrentAI = AIBase.CreateAIToGameobject(GameManager.CurrentLevel.gameObject);
+				}
+				
+				GameManager.CurrentLevel.DeactivateAll();
+				
+				// Showing to player what to do
+				CurrentAI.StartShowHint();
 			}
-			
-			GameManager.CurrentLevel.DeactivateAll();
-			
-			// Showing to player what to do
-			CurrentAI.StartShowHint();
+			else
+			{
+				Debug.LogError("Cant Play NULL Level!");
+			}			
 		}
 		else if(CurrentState == GameState.GamePlayer)
 		{
-			SessionPlays++;
+			LevelCombosPlayed++;
 			
 			// Players turn
 			CurrentAI.Stop();
 			
 			Invoke("EvaluatePlayer", 5f);
 		}
-		else if (CurrentState == GameState.GameWin)
+		else if (CurrentState == GameState.LevelWin)
 		{
 			ShowUIMenu(WinMenu);
-			OnClickGotoState = GameState.GameStart;
+			OnClickGotoState = GameState.LoadLevel;
+			CurrentLevelIndex++;
 		}
-		else if (CurrentState == GameState.GameLost)
+		else if (CurrentState == GameState.LevelLost)
 		{
 			ShowUIMenu(LostMenu);
 			OnClickGotoState = GameState.GameStart;
-		}
-		
-		if (CurrentState == GameState.GameWin || CurrentState == GameState.GameLost)
-		{
-			// Clear Game
-			if (GameManager.CurrentLevel != null)
-			{
-				GameManager.CurrentLevel.ClearAndDestroy();
-			}
 		}
 	}
 	
@@ -163,22 +182,22 @@ public class GameManager : MonoBehaviour
 		if (PointRaytrace.CurrentPlayerHitsID == CurrentAI.CurrentTargetsID)
 		{
 			Debug.Log("-- COMBO SUCCESS --");
-			SessionWins++;
+			LevelComboWins++;
 		}
 		else
 		{
 			Debug.Log("-- COMBO FAIL --");
 		}
 		
-		if ((SessionPlays - SessionWins) > CurrentLevel.GetRules().AcceptedFailures)
+		if ((LevelCombosPlayed - LevelComboWins) > CurrentLevel.GetRules().AcceptedFailures)
 		{
 			Debug.Log("-- LEVEL FAILED --");
-			ChangeState(GameState.GameLost);
+			ChangeState(GameState.LevelLost);
 		}
-		else if (SessionWins >= CurrentLevel.GetRules().SuccessesNeeded)
+		else if (LevelComboWins >= CurrentLevel.GetRules().SuccessesNeeded)
 		{
 			Debug.Log("-- LEVEL WIN --");
-			ChangeState(GameState.GameWin);
+			ChangeState(GameState.LevelWin);
 		}
 		else
 		{
@@ -191,20 +210,29 @@ public class GameManager : MonoBehaviour
 		ChangeState(GameState.GameAI);
 	}
 
-	public void LoadFirstLevelIfNull()
+	public bool LoadCurrentLevel()
 	{
 		if (CurrentLevel == null)
 		{
-			// load level
-			GameObject.Instantiate(LevelArray[0].gameObject);
+			// Load level
+			if (CurrentLevelIndex < LevelArray.Length && LevelArray[CurrentLevelIndex] != null)
+			{
+				GameObject newLevelObj = GameObject.Instantiate(LevelArray[CurrentLevelIndex].gameObject) as GameObject;
+				
+				GameManager.CurrentLevel = newLevelObj.GetComponent<LevelBase>();
+				
+				return true;
+			}
+			else
+			{
+				Debug.LogWarning("RUN OUT OF LEVELS " + CurrentLevelIndex);
+				ChangeState(GameState.GameStart);
+			}
 		}
+		
+		return false;
 	}
-
-	public virtual void restartTheGame()
-	{
-		//Application.LoadLevel(Application.loadedLevel);
-	}
-
+	
 	public static GameManager instance
 	{
 		get
