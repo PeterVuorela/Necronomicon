@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private GameObject LostMenu;
 	
+	[SerializeField]
+	private GameObject ReadyMenu;
+	
+	[SerializeField]
+	private GameObject StartMenu;
+	
 	private GameObject CurrentUIMenu = null;
 	
 	public static int CurrentLevelIndex = 0;
