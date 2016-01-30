@@ -14,10 +14,10 @@ public class LevelBase : MonoBehaviour
 	
 	void Start () 
 	{
-		GameObject[] targetsArray = GameObject.FindGameObjectsWithTag(TargetTag);
+		TargetBase[] targetsArray = transform.gameObject.GetComponentsInChildren<TargetBase>();
 		for (int i = 0; i < targetsArray.Length; i++)
 		{
-			targetsArray[i].GetComponent<TargetBase>().id = i;
+			targetsArray[i].id = i;
 			GameObject obj = GameObject.Instantiate(TargetPrefab) as GameObject;
 			obj.transform.parent = targetsArray[i].transform;
 			obj.transform.localScale = Vector3.one;
@@ -29,6 +29,14 @@ public class LevelBase : MonoBehaviour
 		GameManager.CurrentLevel = this;
 		
 		TestAI();
+	}
+	
+	public void GiveXAmountOfRandomTargetsVector( int targetAmount, ref Vector3[] resultArray)
+	{
+		for (int i = 0; i < resultArray.Length; i++)
+		{
+			resultArray[i] = GiveRandomTarget().transform.localPosition;
+		}
 	}
 	
 	public TargetBase GiveRandomTarget()
