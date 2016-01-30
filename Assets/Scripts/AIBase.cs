@@ -76,6 +76,7 @@ public class AIBase : MonoBehaviour
 			gameObject.SetActive(true);
 			target.Activate();
 			CurrentTargetsID = "";
+			GameManager.HandleHitID(target, ref CurrentTargetsID);
 			
 			Debug.Log("AI Reset position");
 		}

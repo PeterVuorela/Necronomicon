@@ -95,4 +95,9 @@ public class LevelBase : MonoBehaviour
 		
 		return -Vector3.back * Time.deltaTime * speed;
 	}
+	
+	public GameRules GetRules()
+	{
+		return LevelRules;
+	}
 }

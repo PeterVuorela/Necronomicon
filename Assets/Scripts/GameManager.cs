@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 	public static GameState CurrentState;
 	public static AIBase CurrentAI;
 	
+	private static int SessionWins = 0;
+	private static int SessionPlays = 0;
+	
 	private static GameManager _Instance;
 	
 	void Awake()
@@ -58,9 +61,13 @@ public class GameManager : MonoBehaviour
 		else if(CurrentState == GameState.LevelSelect)
 		{
 			Invoke("StarFirstLevel", 2f);
+			SessionWins = 0;
+			SessionPlays = 0;
 		}
 		else if(CurrentState == GameState.AI)
 		{
+			PointRaytrace.CurrentPlayerHitsID = "";
+			
 			// Create AI if null
 			if (CurrentAI == null)
 			{
@@ -74,14 +81,40 @@ public class GameManager : MonoBehaviour
 		}
 		else if(CurrentState == GameState.Player)
 		{
+			SessionPlays++;
 			// Clear player last combo
-			PointRaytrace.CurrentPlayerHitsID = "";
+			
 			
 			// Players turn
 			CurrentAI.Stop();
 			
-			Invoke("RunAIAgain", 5f);
+			Invoke("EvaluatePlayer", 5f);
 		}
+	}
+	
+	private void EvaluatePlayer()
+	{
+		Debug.Log("EvaluatePlayer-> " + PointRaytrace.CurrentPlayerHitsID + " : " + CurrentAI.CurrentTargetsID);
+		if (PointRaytrace.CurrentPlayerHitsID == CurrentAI.CurrentTargetsID)
+		{
+			Debug.Log("-- SUCCESS --");
+			SessionWins++;
+		}
+		else
+		{
+			Debug.Log("-- FAIL --");
+		}
+		
+		if ((SessionPlays - SessionWins) > CurrentLevel.GetRules().AcceptedFailures)
+		{
+			Debug.Log("-- LEVEL FAILED --");
+		}
+		else if (SessionWins >= CurrentLevel.GetRules().SuccessesNeeded)
+		{
+			Debug.Log("-- LEVEL WIN --");
+		}
+		
+		Invoke("RunAIAgain", 3f);
 	}
 	
 	private void RunAIAgain()
