@@ -7,6 +7,9 @@ public class LevelBase : MonoBehaviour
 	[SerializeField]
 	private GameObject TargetPrefab;
 	
+	[SerializeField]
+	private bool RotateEnable = true;
+	
 	public const string TargetTag = "Target";
 	public static List<TargetBase> TargetsList = new List<TargetBase>();
 	
@@ -51,8 +54,13 @@ public class LevelBase : MonoBehaviour
 		return TargetsList[Random.Range(0, TargetsList.Count-1)];
 	}
 	
-	public static Vector3 GetCurrentRotation(float speed = 5f, bool clockwise = true)
+	public static Vector3 GetCurrentRotation(bool clockwise = true, float speed = 5f)
 	{
+		if (!GameManager.CurrentLevel.RotateEnable)
+		{
+			return Vector3.zero;
+		}
+	
 		if (clockwise)
 		{
 			return Vector3.back * Time.deltaTime * speed;
