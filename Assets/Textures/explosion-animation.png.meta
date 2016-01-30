@@ -6,6 +6,7 @@ TextureImporter:
     21300002: explosion-animation_1
     21300004: explosion-animation_2
     21300006: explosion-animation_3
+    21300008: explosion-animation_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -81,6 +82,16 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: explosion-animation_4
+      rect:
+        serializedVersion: 2
+        x: 96
         y: 0
         width: 24
         height: 24
