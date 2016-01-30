@@ -147,8 +147,6 @@ public class GameManager : MonoBehaviour
 			
 			// Players turn
 			CurrentAI.Stop();
-			
-			Invoke("EvaluatePlayer", 5f);
 		}
 		else if (CurrentState == GameState.LevelWin)
 		{
@@ -176,33 +174,38 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
-	private void EvaluatePlayer()
+	public static  void EvaluatePlayerState()
 	{
 		Debug.Log("EvaluatePlayer-> " + PointRaytrace.CurrentPlayerHitsID + " : " + CurrentAI.CurrentTargetsID);
-		if (PointRaytrace.CurrentPlayerHitsID == CurrentAI.CurrentTargetsID)
+		if (CurrentState == GameState.GamePlayer && PointRaytrace.CurrentPlayerHitsID.Length > 0)
 		{
-			Debug.Log("-- COMBO SUCCESS --");
-			LevelComboWins++;
-		}
-		else
-		{
-			Debug.Log("-- COMBO FAIL --");
+			if (PointRaytrace.CurrentPlayerHitsID == CurrentAI.CurrentTargetsID)
+			{
+				Debug.Log("-- COMBO SUCCESS --");
+				LevelComboWins++;
+				
+				if ((LevelCombosPlayed - LevelComboWins) > CurrentLevel.GetRules().AcceptedFailures)
+				{
+					Debug.Log("-- LEVEL FAILED --");
+					ChangeState(GameState.LevelLost);
+				}
+				else
+				if (LevelComboWins >= CurrentLevel.GetRules().SuccessesNeeded)
+				{
+					Debug.Log("-- LEVEL WIN --");
+					ChangeState(GameState.LevelWin);
+				}
+			}
+			else if (!CurrentAI.CurrentTargetsID.Contains(PointRaytrace.CurrentPlayerHitsID))
+			{
+				Debug.Log("-- COMBO FAIL --");
+				ChangeState(GameState.LevelLost);
+			}
+			
+//			 
+			
 		}
 		
-		if ((LevelCombosPlayed - LevelComboWins) > CurrentLevel.GetRules().AcceptedFailures)
-		{
-			Debug.Log("-- LEVEL FAILED --");
-			ChangeState(GameState.LevelLost);
-		}
-		else if (LevelComboWins >= CurrentLevel.GetRules().SuccessesNeeded)
-		{
-			Debug.Log("-- LEVEL WIN --");
-			ChangeState(GameState.LevelWin);
-		}
-		else
-		{
-			Invoke("NextTurn", 3f);
-		}
 	}
 	
 	private void NextTurn()
@@ -274,7 +277,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (!list.Contains(target.id.ToString()))
 		{
-			list+="/" + target.id;
+			list+= target.id;
 			return true;
 		}
 		return false;

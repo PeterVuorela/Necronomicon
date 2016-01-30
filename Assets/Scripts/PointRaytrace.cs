@@ -23,8 +23,7 @@ public class PointRaytrace : MonoBehaviour
 
 	void Update ()
 	{
-		//GameManager.CurrentState == GameManager.GameState.Player
-		if((ifEditor() && Input.GetMouseButton(0)) || Input.touchCount > 0 )
+		if(GameManager.CurrentState == GameManager.GameState.GamePlayer && (ifEditor() && Input.GetMouseButton(0)) || Input.touchCount > 0 )
 		{
 			touching = true;
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -51,6 +50,7 @@ public class PointRaytrace : MonoBehaviour
 						{
 							hitBase.ShowHit();
 							Debug.Log("HIT: " + CurrentPlayerHitsID);
+							GameManager.EvaluatePlayerState();
 						}
 					}
 				}
