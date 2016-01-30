@@ -14,7 +14,7 @@ public class AIBase : MonoBehaviour
 	public static bool Init = false;
 	public State CurrentState = State.Done;
 	
-	private int DoneWaitTime = 4;
+	private int DoneWaitTime = 2;
 	
 	private bool AIEnabled = false;
 	private Tweener tweener = new Tweener();
@@ -48,7 +48,7 @@ public class AIBase : MonoBehaviour
 	
 	public void StartShowHint()
 	{	
-		GameManager.CurrentLevel.PopulateWithXAmountOfRandomTargets(4, ref CurrentTargetList);
+		GameManager.CurrentLevel.PopulateWithXAmountOfRandomTargets(5, ref CurrentTargetList);
 		
 		AIEnabled = true;
 		TargetNextTarget();

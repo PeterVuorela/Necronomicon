@@ -70,13 +70,13 @@ public class LevelBase : MonoBehaviour
 		return TargetsList[UnityEngine.Random.Range(0, TargetsList.Count-1)];
 	}
 	
-	public static Vector3 GetCurrentRotation(bool clockwise = true, float speed = 5f)
+	public static Vector3 GetCurrentRotation(bool clockwise = true, float speed = 10f)
 	{
-		if (!GameManager.CurrentLevel.RotateEnable)
+		if (!GameManager.CurrentLevel.RotateEnable || GameManager.CurrentState == GameManager.GameState.AI)
 		{
 			return Vector3.zero;
 		}
-	
+		
 		if (clockwise)
 		{
 			return Vector3.back * Time.deltaTime * speed;
