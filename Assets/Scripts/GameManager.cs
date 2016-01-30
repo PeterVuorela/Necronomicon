@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 		{
 			if (GameManager.CurrentLevel != null)
 			{
-				ShowUIMenu(null);
+				ShowUIMenu(ReadyMenu);
 				
 				PointRaytrace.CurrentPlayerHitsID = "";
 				
@@ -149,6 +149,9 @@ public class GameManager : MonoBehaviour
 		}
 		else if(CurrentState == GameState.GamePlayer)
 		{
+			ShowUIMenu(StartMenu);
+			Invoke("HideUIMenus", 1f);
+			
 			LevelCombosPlayed++;
 			
 			// Players turn
@@ -164,6 +167,14 @@ public class GameManager : MonoBehaviour
 		{
 			ShowUIMenu(LostMenu);
 			OnClickGotoState = GameState.GameStart;
+		}
+	}
+	
+	private void HideUIMenus()
+	{
+		if (CurrentState == GameState.GamePlayer)
+		{
+			ShowUIMenu(null);
 		}
 	}
 	
