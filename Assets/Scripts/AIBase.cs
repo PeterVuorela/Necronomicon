@@ -12,7 +12,7 @@ public class AIBase : MonoBehaviour
 	}
 	
 	public static bool Init = false;
-	public State CurrentState = State.Waiting;
+	public State CurrentState = State.Done;
 	
 	private int DoneWaitTime = 4;
 	
@@ -59,23 +59,31 @@ public class AIBase : MonoBehaviour
 		//
 	}
 	
-	public void StopAndClear()
+	public void Stop()
 	{
 		AIEnabled = false;
 		CurrentTargetIndex = -1;
-		tweener = null;
-		gameObject.SetActive(false);
 	}
 	
 	private void TargetNextTarget()
 	{
+		if (CurrentState == State.Done)
+		{
+			// reset position to fist
+			transform.localPosition = GetNextTarget().transform.localPosition;
+			gameObject.SetActive(true);
+			
+			Debug.Log("AI Reset position");
+		}
+	
+		// Then start tween to next in list
 		SetTarget(GetNextTarget());
 	}
 	
 	private void SetTarget(TargetBase target)
 	{
 		if (target != null)
-		{
+		{	
 			CurrentState = State.Moving;
 			
 			Vector3 from = transform.localPosition;

@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 		}
 		else if(CurrentState == GameState.LevelSelect)
 		{
-			StarFirstLevel();
+			Invoke("StarFirstLevel", 2f);
 		}
 		else if(CurrentState == GameState.AI)
 		{
@@ -73,8 +73,15 @@ public class GameManager : MonoBehaviour
 		else if(CurrentState == GameState.Player)
 		{
 			// Players turn
-			CurrentAI.StopAndClear();
+			CurrentAI.Stop();
+			
+			Invoke("RunAIAgain", 5f);
 		}
+	}
+	
+	private void RunAIAgain()
+	{
+		ChangeState(GameState.AI);
 	}
 
 	public void StarFirstLevel()
