@@ -51,7 +51,7 @@ public class LevelBase : MonoBehaviour
 	
 	private void TestAI()
 	{
-		GameObject obj = GameManager.instance.InstantiateDragObjectTo(null);
+		GameObject obj = GameManager.instance.InstantiateDragObjectTo(null, false);
 		obj.transform.parent = transform;
 		obj.transform.localScale = Vector3.one;
 		

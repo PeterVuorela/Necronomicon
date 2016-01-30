@@ -14,7 +14,7 @@ public class PointRaytrace : MonoBehaviour
 	{
 		if (renderTrail == null)
 		{
-			renderTrail = GameManager.instance.InstantiateDragObjectTo(gameObject);
+			renderTrail = GameManager.instance.InstantiateDragObjectTo(GameManager.CurrentLevel.gameObject);
 		}
 	}
 

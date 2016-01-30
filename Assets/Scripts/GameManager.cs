@@ -5,7 +5,10 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject DragPrefab;
+	private GameObject DragPrefabPlayer;
+	
+	[SerializeField]
+	private GameObject DragPrefabAI;
 	
 	[SerializeField]
 	private LevelBase[] LevelArray;
@@ -16,13 +19,14 @@ public class GameManager : MonoBehaviour
 	void Awake()
 	{
 		_Instance = this;
+		
+		Application.targetFrameRate = 60;
+		StarFirstLevel();
 	}
 	
 	void Start()
 	{
-		Application.targetFrameRate = 60;
-		
-		StarFirstLevel();
+		//
 	}
 
 	public void StarFirstLevel()
@@ -46,12 +50,22 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
-	public GameObject InstantiateDragObjectTo(GameObject obj)
+	public GameObject InstantiateDragObjectTo(GameObject obj, bool player = true)
 	{
-		GameObject newObj = null;
-		if (DragPrefab != null)
+		GameObject prefab = null;
+		if (player)
 		{
-			newObj = GameObject.Instantiate(DragPrefab) as GameObject;
+			prefab = DragPrefabPlayer;
+		}
+		else
+		{
+			prefab = DragPrefabAI;
+		}
+		
+		GameObject newObj = null;
+		if (prefab != null)
+		{
+			newObj = GameObject.Instantiate(prefab) as GameObject;
 			
 			if (obj != null)
 			{
@@ -59,7 +73,7 @@ public class GameManager : MonoBehaviour
 			}
 			
 			newObj.transform.localPosition = Vector3.zero;
-			newObj.transform.localScale = DragPrefab.transform.localScale;
+			newObj.transform.localScale = prefab.transform.localScale;
 		}
 		
 		return newObj;
