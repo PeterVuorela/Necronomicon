@@ -100,4 +100,13 @@ public class LevelBase : MonoBehaviour
 	{
 		return LevelRules;
 	}
+
+	public void ClearAndDestroy ()
+	{
+		if (gameObject != null)
+		{
+			TargetsList.Clear();
+			DestroyImmediate(gameObject);
+		}
+	}
 }

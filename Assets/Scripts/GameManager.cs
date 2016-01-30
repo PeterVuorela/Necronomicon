@@ -56,13 +56,19 @@ public class GameManager : MonoBehaviour
 	{
 		if (CurrentState == GameState.None)
 		{
+			if (GameManager.CurrentLevel != null)
+			{
+				GameManager.CurrentLevel.ClearAndDestroy();
+			}
+			
 			ChangeState(GameState.LevelSelect);
 		}
 		else if(CurrentState == GameState.LevelSelect)
 		{
-			Invoke("StarFirstLevel", 2f);
 			SessionWins = 0;
 			SessionPlays = 0;
+			
+			Invoke("StarFirstLevel", 2f);
 		}
 		else if(CurrentState == GameState.AI)
 		{
@@ -108,10 +114,12 @@ public class GameManager : MonoBehaviour
 		if ((SessionPlays - SessionWins) > CurrentLevel.GetRules().AcceptedFailures)
 		{
 			Debug.Log("-- LEVEL FAILED --");
+			ChangeState(GameState.None);
 		}
 		else if (SessionWins >= CurrentLevel.GetRules().SuccessesNeeded)
 		{
 			Debug.Log("-- LEVEL WIN --");
+			ChangeState(GameState.None);
 		}
 		
 		Invoke("RunAIAgain", 3f);
