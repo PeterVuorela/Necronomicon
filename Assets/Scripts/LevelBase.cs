@@ -14,7 +14,7 @@ public class GameRules
 public class LevelBase : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject TargetPrefab;
+	private GameObject HitEffectPrefab;
 	
 	[SerializeField]
 	private bool RotateEnable = true;
@@ -31,12 +31,15 @@ public class LevelBase : MonoBehaviour
 		for (int i = 0; i < targetsArray.Length; i++)
 		{
 			targetsArray[i].id = i;
-			if (TargetPrefab != null)
+			if (HitEffectPrefab != null)
 			{
-				GameObject obj = GameObject.Instantiate(TargetPrefab) as GameObject;
+				// Add hit effect
+				GameObject obj = GameObject.Instantiate(HitEffectPrefab) as GameObject;
 				obj.transform.parent = targetsArray[i].transform;
 				obj.transform.localScale = Vector3.one;
 				obj.transform.localPosition = Vector3.zero;
+				obj.SetActive(false);
+				targetsArray[i].GetComponent<TargetBase>().hitEffectParent = obj;
 			}
 			TargetsList.Add(targetsArray[i].GetComponent<TargetBase>());
 		}
@@ -47,6 +50,14 @@ public class LevelBase : MonoBehaviour
 	void Update()
 	{
 		transform.Rotate(GetCurrentRotation());
+	}
+	
+	public void DeactivateAll()
+	{
+		for (int i = 0; i < TargetsList.Count; i++ )
+		{
+			TargetsList[i].Deactivate();
+		}
 	}
 	
 	public void PopulateWithXAmountOfRandomTargets( int targetAmount, ref List<TargetBase> resultList)

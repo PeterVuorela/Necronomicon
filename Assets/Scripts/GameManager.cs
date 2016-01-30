@@ -67,11 +67,16 @@ public class GameManager : MonoBehaviour
 				CurrentAI = AIBase.CreateAIToGameobject(GameManager.CurrentLevel.gameObject);
 			}
 			
+			GameManager.CurrentLevel.DeactivateAll();
+			
 			// Showing to player what to do
 			CurrentAI.StartShowHint();
 		}
 		else if(CurrentState == GameState.Player)
 		{
+			// Clear player last combo
+			PointRaytrace.CurrentPlayerHitsID = "";
+			
 			// Players turn
 			CurrentAI.Stop();
 			
@@ -135,5 +140,15 @@ public class GameManager : MonoBehaviour
 		}
 		
 		return newObj;
+	}
+	
+	public static bool HandleHitID(TargetBase target, ref string list)
+	{
+		if (!list.Contains(target.id.ToString()))
+		{
+			list+="/" + target.id;
+			return true;
+		}
+		return false;
 	}
 }

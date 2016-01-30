@@ -13,6 +13,7 @@ public class AIBase : MonoBehaviour
 	
 	public static bool Init = false;
 	public State CurrentState = State.Done;
+	public string CurrentTargetsID = "";
 	
 	private int DoneWaitTime = 2;
 	
@@ -70,8 +71,11 @@ public class AIBase : MonoBehaviour
 		if (CurrentState == State.Done)
 		{
 			// reset position to fist
-			transform.localPosition = GetNextTarget().transform.localPosition;
+			TargetBase target = GetNextTarget();
+			transform.localPosition = target.transform.localPosition;
 			gameObject.SetActive(true);
+			target.Activate();
+			CurrentTargetsID = "";
 			
 			Debug.Log("AI Reset position");
 		}
@@ -83,7 +87,9 @@ public class AIBase : MonoBehaviour
 	private void SetTarget(TargetBase target)
 	{
 		if (target != null)
-		{	
+		{
+			GameManager.HandleHitID(target, ref CurrentTargetsID);
+			
 			CurrentState = State.Moving;
 			
 			Vector3 from = transform.localPosition;
@@ -94,10 +100,13 @@ public class AIBase : MonoBehaviour
 			
 			tweener.easeFromTo(from, to, 0.5f, randomEasing, TargetNextTarget);
 			Debug.Log("AI CurrentTarget: " + target.id);
+			
+			target.Activate();
 		}
 		else
 		{
 			CurrentState = State.Waiting;
+			Debug.Log("AI Waits for: " + CurrentTargetsID);
 			Invoke("SetAIDoneState", DoneWaitTime);
 		}
 	}

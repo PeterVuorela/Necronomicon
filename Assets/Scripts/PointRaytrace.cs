@@ -10,6 +10,9 @@ public class PointRaytrace : MonoBehaviour
 	private Ray ray;
 	private static float nextTouchTime = 0f;
 	
+	public static string CurrentPlayerHitsID = "";
+	private TargetBase hitBase = null;
+	
 	void Start()
 	{
 		if (playerTrail == null)
@@ -39,6 +42,18 @@ public class PointRaytrace : MonoBehaviour
 			if (Physics.Raycast(ray, out hit, 100f))
 			{
 				// HIT
+				if (GameManager.CurrentState == GameManager.GameState.Player)
+				{
+					hitBase = hit.collider.gameObject.GetComponent<TargetBase>();
+					if (hitBase != null)
+					{
+						if (GameManager.HandleHitID(hitBase, ref CurrentPlayerHitsID))
+						{
+							hitBase.ShowHit();
+							Debug.Log("HIT: " + CurrentPlayerHitsID);
+						}
+					}
+				}
 			}
 		}
 		else
@@ -64,7 +79,7 @@ public class PointRaytrace : MonoBehaviour
 	{
 		if(touching)
 		{
-			Debug.DrawRay(ray.origin - (Vector3.forward*0.5f), ray.direction*10, Color.yellow);
+			Debug.DrawRay(ray.origin, ray.direction*100f, Color.yellow);
 		}
 	}
 }
