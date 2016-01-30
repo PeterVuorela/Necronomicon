@@ -18,11 +18,13 @@ public class LevelBase : MonoBehaviour
 		for (int i = 0; i < targetsArray.Length; i++)
 		{
 			targetsArray[i].id = i;
-			GameObject obj = GameObject.Instantiate(TargetPrefab) as GameObject;
-			obj.transform.parent = targetsArray[i].transform;
-			obj.transform.localScale = Vector3.one;
-			obj.transform.localPosition = Vector3.zero;
-			
+			if (TargetPrefab != null)
+			{
+				GameObject obj = GameObject.Instantiate(TargetPrefab) as GameObject;
+				obj.transform.parent = targetsArray[i].transform;
+				obj.transform.localScale = Vector3.one;
+				obj.transform.localPosition = Vector3.zero;
+			}
 			TargetsList.Add(targetsArray[i].GetComponent<TargetBase>());
 		}
 		
