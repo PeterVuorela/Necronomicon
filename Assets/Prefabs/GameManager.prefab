@@ -44,8 +44,8 @@ MonoBehaviour:
   DragPrefabAI: {fileID: 192814, guid: dd982f0b456b348c4971128330dba220, type: 2}
   LevelArray:
   - {fileID: 11433312, guid: 918c6541b680e4700ab364a49042d59d, type: 2}
-  - {fileID: 11433312, guid: 9fd462b118c62473d9e1f200e18901c2, type: 2}
-  - {fileID: 11433312, guid: 9549e4fdaf4094288817128ab981f2fd, type: 2}
+  - {fileID: 11433312, guid: 859ddc64beeab4fb08e04e294e2d4aa0, type: 2}
+  - {fileID: 11433312, guid: 1d8ba730bfc574ccd91ab2632d3ecce7, type: 2}
   - {fileID: 11433312, guid: 103e78c55034e440f9fe6aedde02679d, type: 2}
   - {fileID: 11433312, guid: 8088aea40d45f4b63adbfb47da322298, type: 2}
   - {fileID: 11433312, guid: fdd2af5c2ed864050a98e9da1f32cd74, type: 2}
