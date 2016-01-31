@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 		GamePlayer,
 		LevelLost,
 		LevelWin,
+		LevelWinOutro,
 		GameEndWin
 	}
 
@@ -44,6 +45,12 @@ public class GameManager : MonoBehaviour
 	
 	[SerializeField]
 	private GameObject StartMenu;
+	
+	[SerializeField]
+	private GameObject SuccessMenu;
+	
+	[SerializeField]
+	private GameObject GameOverMenu;
 	
 	private GameObject CurrentUIMenu = null;
 	
@@ -157,6 +164,11 @@ public class GameManager : MonoBehaviour
 			// Players turn
 			CurrentAI.Stop();
 		}
+		else if (CurrentState == GameState.LevelWinOutro)
+		{
+			ShowUIMenu(SuccessMenu);
+			Invoke("LevelWinOutroComplete", 2f);
+		}
 		else if (CurrentState == GameState.LevelWin)
 		{
 			ShowUIMenu(WinMenu);
@@ -168,6 +180,21 @@ public class GameManager : MonoBehaviour
 			ShowUIMenu(LostMenu);
 			OnClickGotoState = GameState.GameStart;
 		}
+		else if (CurrentState == GameState.GameEndWin)
+		{
+			ShowUIMenu(GameOverMenu);
+			Invoke("ReplayFromStart", 10f);
+		}
+	}
+	
+	private void LevelWinOutroComplete()
+	{
+		ChangeState(GameState.LevelWin);
+	}
+	
+	private void ReplayFromStart()
+	{
+		ChangeState(GameState.GameStart);
 	}
 	
 	private void HideUIMenus()
@@ -210,7 +237,7 @@ public class GameManager : MonoBehaviour
 				if (LevelComboWins >= CurrentLevel.GetRules().SuccessesNeeded)
 				{
 					Debug.Log("-- LEVEL WIN --");
-					ChangeState(GameState.LevelWin);
+					ChangeState(GameState.LevelWinOutro);
 				}
 			}
 			else if (!CurrentAI.CurrentTargetsID.Contains(PointRaytrace.CurrentPlayerHitsID))
@@ -245,8 +272,8 @@ public class GameManager : MonoBehaviour
 			}
 			else
 			{
-				Debug.LogWarning("RUN OUT OF LEVELS " + CurrentLevelIndex);
-				ChangeState(GameState.GameStart);
+				Debug.Log("-- RUN OUT OF LEVELS, I GUESS YOU WON --- CurrentLevelIndex: " + CurrentLevelIndex);
+				ChangeState(GameState.GameEndWin);
 			}
 		}
 		

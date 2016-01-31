@@ -23,7 +23,7 @@ public class PointRaytrace : MonoBehaviour
 
 	void Update ()
 	{
-		if(GameManager.CurrentState == GameManager.GameState.GamePlayer && ((ifEditor() && Input.GetMouseButton(0)) || Input.touchCount > 0) )
+		if( (GameManager.CurrentState == GameManager.GameState.GamePlayer || GameManager.CurrentState == GameManager.GameState.LevelWinOutro) && ((ifEditor() && Input.GetMouseButton(0)) || Input.touchCount > 0) )
 		{
 			touching = true;
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
