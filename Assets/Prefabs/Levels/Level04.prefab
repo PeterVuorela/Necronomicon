@@ -379,7 +379,7 @@ GameObject:
   - 4: {fileID: 433304}
   - 114: {fileID: 11433312}
   m_Layer: 0
-  m_Name: Level6
+  m_Name: Level04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1858,8 +1858,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitEffectPrefab: {fileID: 138120, guid: 884f271184ea2469da050d419354d2af, type: 2}
   LevelSettings:
-    RotateSpeed: 13
-    NumberTargets: 6
+    RotateSpeed: -10
+    NumberTargets: 5
     SuccessesNeeded: 0
     AcceptedFailures: 0
 --- !u!114 &11433314
