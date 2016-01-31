@@ -1362,7 +1362,7 @@ MonoBehaviour:
   HitEffectPrefab: {fileID: 138120, guid: 884f271184ea2469da050d419354d2af, type: 2}
   LevelSettings:
     RotateSpeed: 10
-    NumberTargets: 7
+    NumberTargets: 6
     SuccessesNeeded: 0
     AcceptedFailures: 0
 --- !u!114 &11433314

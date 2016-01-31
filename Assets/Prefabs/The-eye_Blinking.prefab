@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21296310}
   - 95: {fileID: 9596310}
   m_Layer: 0
-  m_Name: The-eye_anim
+  m_Name: The-eye_Blinking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
