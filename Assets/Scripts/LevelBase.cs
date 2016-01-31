@@ -7,10 +7,14 @@ using System.Collections.Generic;
 [Serializable]
 public class LeveSettings
 {
-	public int SuccessesNeeded;
-	public int AcceptedFailures;
+	[SerializeField]
 	public int RotateSpeed = 0;
+	[SerializeField]
 	public int NumberTargets = 4;
+	[SerializeField]
+	public int SuccessesNeeded;
+	[SerializeField]
+	public int AcceptedFailures;
 }
 
 public class LevelBase : MonoBehaviour
@@ -42,6 +46,9 @@ public class LevelBase : MonoBehaviour
 			}
 			TargetsList.Add(targetsArray[i].GetComponent<TargetBase>());
 		}
+		
+		Debug.Log("Level Loaded: Rotate Speed" + GetSettings().RotateSpeed);
+		Debug.Log("Level Loaded: Number Targets" + GetSettings().NumberTargets);
 	}
 	
 	void Update()
