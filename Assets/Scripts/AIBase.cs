@@ -38,7 +38,7 @@ public class AIBase : MonoBehaviour
 		if (AIEnabled && tweener != null && tweener.animating)
 		{
 			tweener.update();
-			transform.localPosition = tweener.progression;
+			transform.position = tweener.progression;
 		}
 		
 		if (CurrentState == State.Done)
@@ -72,7 +72,7 @@ public class AIBase : MonoBehaviour
 		{
 			// reset position to fist
 			TargetBase target = GetNextTarget();
-			transform.localPosition = target.transform.localPosition;
+			transform.position = target.transform.position;
 			gameObject.SetActive(true);
 			target.Activate();
 			CurrentTargetsID = "";
@@ -93,8 +93,8 @@ public class AIBase : MonoBehaviour
 			
 			CurrentState = State.Moving;
 			
-			Vector3 from = transform.localPosition;
-			Vector3 to = target.transform.localPosition;
+			Vector3 from = transform.position;
+			Vector3 to = target.transform.position;
 			
 			Tweener.TweenDelegate[] easings = new Tweener.TweenDelegate[]{ Easing.Linear };
 			Tweener.TweenDelegate randomEasing = easings[Random.Range(0, easings.Length-1)];
