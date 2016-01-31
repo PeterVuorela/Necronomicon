@@ -1126,13 +1126,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22483950}
+  - 114: {fileID: 11423488}
   m_Layer: 0
   m_Name: Retry_Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &183940
 GameObject:
   m_ObjectHideFlags: 1
@@ -2278,6 +2279,25 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Observe!
+--- !u!114 &11423488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c30cbfbd65d04cd28f5b4ec8897e3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EyesOpen:
+  - {fileID: 168820}
+  - {fileID: 168822}
+  - {fileID: 168824}
+  EyesClosed:
+  - {fileID: 168814}
+  - {fileID: 168816}
+  - {fileID: 168818}
 --- !u!114 &11449718
 MonoBehaviour:
   m_ObjectHideFlags: 1

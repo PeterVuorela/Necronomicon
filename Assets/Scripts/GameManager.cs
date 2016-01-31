@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 	[Header("Globa Settings")]
 	[SerializeField]
 	private int AcceptedRetries;
-	public static int RetryCount;
+	public static int RetriesUsed;
 
 	[Header("Prefabs")]
 	[SerializeField]
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 			
 			// Reset game
 			CurrentLevelIndex = 0;
-			RetryCount = 0;
+			RetriesUsed = 0;
 		}
 		else if(CurrentState == GameState.Intro)
 		{	
@@ -187,10 +187,10 @@ public class GameManager : MonoBehaviour
 		else if (CurrentState == GameState.LevelLost)
 		{
 			ShowUIMenu(LostMenu);
-			RetryCount++;
-			if (AcceptedRetries > RetryCount)
+			RetriesUsed++;
+			if (AcceptedRetries >= RetriesUsed)
 			{
-				Debug.Log(RetryCount + " of " + AcceptedRetries + " AcceptedRetries");
+				Debug.Log(RetriesUsed + " of " + AcceptedRetries + " AcceptedRetries");
 				OnClickGotoState = GameState.LoadLevel;
 			}
 			else
