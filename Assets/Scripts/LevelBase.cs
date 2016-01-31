@@ -5,10 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 [Serializable]
-public class GameRules
+public class LeveSettings
 {
 	public int SuccessesNeeded;
 	public int AcceptedFailures;
+	public int RotateSpeed = 0;
+	public int NumberTargets = 4;
 }
 
 public class LevelBase : MonoBehaviour
@@ -17,10 +19,7 @@ public class LevelBase : MonoBehaviour
 	private GameObject HitEffectPrefab;
 	
 	[SerializeField]
-	private bool RotateEnable = true;
-	
-	[SerializeField]
-	private GameRules LevelRules;
+	private LeveSettings LevelSettings;
 	
 	public const string TargetTag = "Target";
 	public static List<TargetBase> TargetsList = new List<TargetBase>();
@@ -79,24 +78,37 @@ public class LevelBase : MonoBehaviour
 		return TargetsList[UnityEngine.Random.Range(0, TargetsList.Count-1)];
 	}
 	
-	public static Vector3 GetCurrentRotation(bool clockwise = true, float speed = 10f)
+	public static Vector3 GetCurrentRotation(bool forceInvert = false)
 	{
-		if (!GameManager.CurrentLevel.RotateEnable || GameManager.CurrentState == GameManager.GameState.GameAI)
+		if (GameManager.CurrentLevel.GetSettings().RotateSpeed == 0 || GameManager.CurrentState == GameManager.GameState.GameAI)
 		{
 			return Vector3.zero;
 		}
+		float rotateSpeed = GameManager.CurrentLevel.GetSettings().RotateSpeed;
 		
-		if (clockwise)
+		if (forceInvert)
 		{
-			return Vector3.back * Time.deltaTime * speed;
+			if(rotateSpeed > 0)
+			{
+				rotateSpeed=-rotateSpeed;
+			}
+			else
+			{
+				rotateSpeed=Math.Abs(rotateSpeed);
+			}
 		}
 		
-		return -Vector3.back * Time.deltaTime * speed;
+		if (rotateSpeed > 0)
+		{
+			return Vector3.back * Time.deltaTime * Math.Abs(rotateSpeed);
+		}
+		
+		return -Vector3.back * Time.deltaTime * Math.Abs(rotateSpeed);
 	}
 	
-	public GameRules GetRules()
+	public LeveSettings GetSettings()
 	{
-		return LevelRules;
+		return LevelSettings;
 	}
 
 	public void ClearAndDestroy ()

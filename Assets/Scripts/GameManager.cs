@@ -228,13 +228,13 @@ public class GameManager : MonoBehaviour
 				Debug.Log("-- COMBO SUCCESS --");
 				LevelComboWins++;
 				
-				if ((LevelCombosPlayed - LevelComboWins) > CurrentLevel.GetRules().AcceptedFailures)
+				if ((LevelCombosPlayed - LevelComboWins) > CurrentLevel.GetSettings().AcceptedFailures)
 				{
 					Debug.Log("-- LEVEL FAILED --");
 					ChangeState(GameState.LevelLost);
 				}
 				else
-				if (LevelComboWins >= CurrentLevel.GetRules().SuccessesNeeded)
+				if (LevelComboWins >= CurrentLevel.GetSettings().SuccessesNeeded)
 				{
 					Debug.Log("-- LEVEL WIN --");
 					ChangeState(GameState.LevelWinOutro);

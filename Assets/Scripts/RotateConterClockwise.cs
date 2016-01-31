@@ -5,6 +5,6 @@ public class RotateConterClockwise : MonoBehaviour
 {
 	void Update()
 	{
-		transform.Rotate(LevelBase.GetCurrentRotation(false));
+		transform.Rotate(LevelBase.GetCurrentRotation(true));
 	}
 }

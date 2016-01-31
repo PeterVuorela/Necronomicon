@@ -11,8 +11,6 @@ public class AIBase : MonoBehaviour
 		Done
 	}
 	
-	public static int ComboLenght = 5;
-	
 	public static bool Init = false;
 	public State CurrentState = State.Done;
 	public string CurrentTargetsID = "";
@@ -51,7 +49,7 @@ public class AIBase : MonoBehaviour
 	
 	public void StartShowHint()
 	{	
-		GameManager.CurrentLevel.PopulateWithXAmountOfRandomTargets(ComboLenght, ref CurrentTargetList);
+		GameManager.CurrentLevel.PopulateWithXAmountOfRandomTargets(GameManager.CurrentLevel.GetSettings().NumberTargets, ref CurrentTargetList);
 		
 		AIEnabled = true;
 		TargetNextTarget();
