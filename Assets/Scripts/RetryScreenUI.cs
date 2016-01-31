@@ -23,11 +23,11 @@ public class RetryScreenUI : MonoBehaviour
 		int i = 0;
 		for (i = 0; i < EyesOpen.Length; i++)
 		{
-			if (GameManager.RetriesUsed < i)
+			if (GameManager.RetriesUsed-1 < i)
 			{
 				EyesOpen[i].SetActive(true);
 			}
-			else if (GameManager.RetriesUsed == i)
+			else if (GameManager.RetriesUsed-1 == i)
 			{
 				DelayedOpen = EyesOpen[i];
 				DelayedClose = EyesClosed[i];

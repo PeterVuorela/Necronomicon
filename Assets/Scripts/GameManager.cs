@@ -58,6 +58,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private GameObject GameOverMenu;
 	
+	[SerializeField]
+	private GameObject GameLoseMenu;
+	
 	private GameObject CurrentUIMenu = null;
 	
 	public static int CurrentLevelIndex = 0;
@@ -185,16 +188,17 @@ public class GameManager : MonoBehaviour
 			CurrentLevelIndex++;
 		}
 		else if (CurrentState == GameState.LevelLost)
-		{
-			ShowUIMenu(LostMenu);
+		{	
 			RetriesUsed++;
 			if (AcceptedRetries >= RetriesUsed)
 			{
+				ShowUIMenu(LostMenu);
 				Debug.Log(RetriesUsed + " of " + AcceptedRetries + " AcceptedRetries");
 				OnClickGotoState = GameState.LoadLevel;
 			}
 			else
 			{
+				ShowUIMenu(GameLoseMenu);
 				OnClickGotoState = GameState.GameStart;
 			}
 		}

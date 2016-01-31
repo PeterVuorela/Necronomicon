@@ -53,6 +53,7 @@ MonoBehaviour:
   StartMenu: {fileID: 0}
   SuccessMenu: {fileID: 0}
   GameOverMenu: {fileID: 0}
+  GameLoseMenu: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
