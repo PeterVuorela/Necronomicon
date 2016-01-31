@@ -17,7 +17,13 @@ public class GameManager : MonoBehaviour
 		LevelWinOutro,
 		GameEndWin
 	}
+	
+	[Header("Globa Settings")]
+	[SerializeField]
+	private int AcceptedRetries;
+	public static int RetryCount;
 
+	[Header("Prefabs")]
 	[SerializeField]
 	private GameObject DragPrefabPlayer;
 	
@@ -112,7 +118,10 @@ public class GameManager : MonoBehaviour
 		{
 			ShowUIMenu(TitleMenu);
 			OnClickGotoState = GameState.Intro;
+			
+			// Reset game
 			CurrentLevelIndex = 0;
+			RetryCount = 0;
 		}
 		else if(CurrentState == GameState.Intro)
 		{	
@@ -178,7 +187,16 @@ public class GameManager : MonoBehaviour
 		else if (CurrentState == GameState.LevelLost)
 		{
 			ShowUIMenu(LostMenu);
-			OnClickGotoState = GameState.GameStart;
+			RetryCount++;
+			if (AcceptedRetries > RetryCount)
+			{
+				Debug.Log(RetryCount + " of " + AcceptedRetries + " AcceptedRetries");
+				OnClickGotoState = GameState.LoadLevel;
+			}
+			else
+			{
+				OnClickGotoState = GameState.GameStart;
+			}
 		}
 		else if (CurrentState == GameState.GameEndWin)
 		{
@@ -245,9 +263,6 @@ public class GameManager : MonoBehaviour
 				Debug.Log("-- COMBO FAIL --");
 				ChangeState(GameState.LevelLost);
 			}
-			
-//			 
-			
 		}
 		
 	}
