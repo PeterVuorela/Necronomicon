@@ -9638,82 +9638,6 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 764e2ffd0cf7742e29c10df38e073177, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!1001 &1673983476
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 306
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 239
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: TitleMenu
-      value: 
-      objectReference: {fileID: 223720060}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: InfoMenu
-      value: 
-      objectReference: {fileID: 1915245019}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: WinMenu
-      value: 
-      objectReference: {fileID: 1113590248}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: LostMenu
-      value: 
-      objectReference: {fileID: 786009080}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: ReadyMenu
-      value: 
-      objectReference: {fileID: 1233475700}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: StartMenu
-      value: 
-      objectReference: {fileID: 1459624199}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: SuccessMenu
-      value: 
-      objectReference: {fileID: 1790532128}
-    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-      propertyPath: GameOverMenu
-      value: 
-      objectReference: {fileID: 671708427}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-  m_RootGameObject: {fileID: 1861291657}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1688614551
 GameObject:
   m_ObjectHideFlags: 0
@@ -10283,7 +10207,7 @@ CanvasRenderer:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 170878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-  m_PrefabInternal: {fileID: 1673983476}
+  m_PrefabInternal: {fileID: 2046994886}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1861291659}
@@ -10300,7 +10224,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351,
     type: 2}
-  m_PrefabInternal: {fileID: 1673983476}
+  m_PrefabInternal: {fileID: 2046994886}
   m_GameObject: {fileID: 1861291657}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -10328,12 +10252,12 @@ MonoBehaviour:
   StartMenu: {fileID: 1459624199}
   SuccessMenu: {fileID: 1790532128}
   GameOverMenu: {fileID: 671708427}
-  GameLoseMenu: {fileID: 0}
+  GameLoseMenu: {fileID: 2127078618}
 --- !u!4 &1861291659
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
-  m_PrefabInternal: {fileID: 1673983476}
+  m_PrefabInternal: {fileID: 2046994886}
   m_GameObject: {fileID: 1861291657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 306, y: 239, z: 0}
@@ -11278,6 +11202,86 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a3dbda9ee28e841beabff944b3d17b1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &2046994886
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 306
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 239
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 470878, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: TitleMenu
+      value: 
+      objectReference: {fileID: 223720060}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: InfoMenu
+      value: 
+      objectReference: {fileID: 1915245019}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: WinMenu
+      value: 
+      objectReference: {fileID: 1113590248}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: LostMenu
+      value: 
+      objectReference: {fileID: 786009080}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: ReadyMenu
+      value: 
+      objectReference: {fileID: 1233475700}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: StartMenu
+      value: 
+      objectReference: {fileID: 1459624199}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: SuccessMenu
+      value: 
+      objectReference: {fileID: 1790532128}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: GameOverMenu
+      value: 
+      objectReference: {fileID: 671708427}
+    - target: {fileID: 11490064, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+      propertyPath: GameLoseMenu
+      value: 
+      objectReference: {fileID: 2127078618}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 05fddd4e59ad34bb880b854c4922f351, type: 2}
+  m_RootGameObject: {fileID: 1861291657}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &2070124751
 GameObject:
   m_ObjectHideFlags: 0
