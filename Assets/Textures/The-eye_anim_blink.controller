@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: The-eye_anim
+  m_Name: The-eye_anim_blink
   serializedVersion: 2
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -25,11 +25,11 @@ State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Closing
+  m_Name: blink
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 7869d182832fe4c63aea09843b601f22, type: 2}
+  - {fileID: 7400000, guid: a358a97a616d54666ab4c11fa472e670, type: 2}
   m_ParentStateMachine: {fileID: 110778454}
   m_Position: {x: 48, y: 48, z: 0}
   m_IKOnFeet: 0
