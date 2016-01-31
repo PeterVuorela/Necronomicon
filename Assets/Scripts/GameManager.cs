@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
 	public static LevelBase CurrentLevel;
 	public static GameState CurrentState = GameState.None;
 	public static GameState OnClickGotoState = GameState.None;
+	public static bool ClickBlocked = false;
 	public static AIBase CurrentAI;
 	
 	private static int LevelComboWins = 0;
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
 	
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0) && OnClickGotoState != GameState.None)
+		if (Input.GetMouseButtonDown(0) && OnClickGotoState != GameState.None && !ClickBlocked)
 		{
 			ChangeState(OnClickGotoState);
 		}
@@ -195,11 +196,15 @@ public class GameManager : MonoBehaviour
 				ShowUIMenu(LostMenu);
 				Debug.Log(RetriesUsed + " of " + AcceptedRetries + " AcceptedRetries");
 				OnClickGotoState = GameState.LoadLevel;
+				
+				BlockClickFor(0.5f);
 			}
 			else
 			{
 				ShowUIMenu(GameLoseMenu);
 				OnClickGotoState = GameState.GameStart;
+				
+				BlockClickFor(0.5f);
 			}
 		}
 		else if (CurrentState == GameState.GameEndWin)
@@ -207,6 +212,17 @@ public class GameManager : MonoBehaviour
 			ShowUIMenu(GameOverMenu);
 			Invoke("ReplayFromStart", 10f);
 		}
+	}
+	
+	private void BlockClickFor(float time)
+	{
+		ClickBlocked = true;
+		Invoke("UnBlockClick", time);
+	}
+	
+	private void UnBlockClick()
+	{
+		ClickBlocked = false;
 	}
 	
 	private void LevelWinOutroComplete()

@@ -50,6 +50,10 @@ MonoBehaviour:
   - {fileID: 11433312, guid: 8088aea40d45f4b63adbfb47da322298, type: 2}
   - {fileID: 11433312, guid: fdd2af5c2ed864050a98e9da1f32cd74, type: 2}
   - {fileID: 11433312, guid: 878fef910a22d466c92781b1b437dbdb, type: 2}
+  - {fileID: 11433312, guid: 2ce97dd58e45349dc9e2f148785e8ec1, type: 2}
+  - {fileID: 11433312, guid: 9e454c4d18aac4ce28bde6605c3f0ca5, type: 2}
+  - {fileID: 11433312, guid: c7e00045ce89a4318a868dabea502237, type: 2}
+  - {fileID: 11433312, guid: e0e57aa4040594b71a740886e0f1332a, type: 2}
   TitleMenu: {fileID: 0}
   InfoMenu: {fileID: 0}
   WinMenu: {fileID: 0}
