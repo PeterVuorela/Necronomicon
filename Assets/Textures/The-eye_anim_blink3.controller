@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: The-eye_anim_blink
+  m_Name: The-eye_anim_blink3
   serializedVersion: 2
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -64,7 +64,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: a358a97a616d54666ab4c11fa472e670, type: 2}
+  - {fileID: 7400000, guid: 5117a56d08cc84917bb3a2f3a527207c, type: 2}
   m_ParentStateMachine: {fileID: 110778454}
   m_Position: {x: 48, y: 84, z: 0}
   m_IKOnFeet: 0
