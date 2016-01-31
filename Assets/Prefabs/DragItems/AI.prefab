@@ -48,9 +48,9 @@ TrailRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 3
+  m_Time: 5
   m_StartWidth: .200000003
-  m_EndWidth: .100000001
+  m_EndWidth: .200000003
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
@@ -67,7 +67,7 @@ TrailRenderer:
     m_Color[4]:
       serializedVersion: 2
       rgba: 1811889964
-  m_MinVertexDistance: .200000003
+  m_MinVertexDistance: .100000001
   m_Autodestruct: 0
 --- !u!1001 &100100000
 Prefab:
